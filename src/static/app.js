@@ -1,4 +1,30 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Dark mode toggle
+  const darkModeToggle = document.getElementById("dark-mode-toggle");
+  const prefersDark = localStorage.getItem("darkMode") === "true";
+  if (prefersDark) {
+    document.documentElement.setAttribute("data-theme", "dark");
+    darkModeToggle.textContent = "☀️";
+    darkModeToggle.setAttribute("aria-label", "Switch to light mode");
+    darkModeToggle.title = "Switch to light mode";
+  }
+  darkModeToggle.addEventListener("click", () => {
+    const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+    if (isDark) {
+      document.documentElement.removeAttribute("data-theme");
+      darkModeToggle.textContent = "🌙";
+      darkModeToggle.setAttribute("aria-label", "Switch to dark mode");
+      darkModeToggle.title = "Switch to dark mode";
+      localStorage.setItem("darkMode", "false");
+    } else {
+      document.documentElement.setAttribute("data-theme", "dark");
+      darkModeToggle.textContent = "☀️";
+      darkModeToggle.setAttribute("aria-label", "Switch to light mode");
+      darkModeToggle.title = "Switch to light mode";
+      localStorage.setItem("darkMode", "true");
+    }
+  });
+
   // DOM elements
   const activitiesList = document.getElementById("activities-list");
   const messageDiv = document.getElementById("message");
